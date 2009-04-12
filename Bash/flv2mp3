@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [ "$1" != "" ]; then
+    #convert audio
+    ffmpeg -i $1 "$2"
+    #move the .flv file to the Videos folder
+    mv $1 $HOME/Videos/"`echo "$2"|sed 's/mp3/flv/'`"
+    echo "FLV file was moved to the ~/Videos folder"
+    mv $2 $HOME/Music/
+    echo "Moved the mp3 to the ~/Music folder"
+else
+    echo "Invalid arguments, please run this script with \"flv2mp3 <input> <output>\""
+fi

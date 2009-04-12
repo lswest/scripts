@@ -1,0 +1,28 @@
+#!/usr/bin/env python
+#Script to condense the multiple files of a project into one for easy printing/copying
+#Author: lswest
+import os
+import optparse
+
+def main():
+    usage="usage: %prog [options] args"
+    p = optparse.OptionParser()
+    p.add_option('--origin', '-o', help="The location of the files to be read in.", default="")
+    p.add_option('--output', '-t', help="The location of the file to which the condensed output will be written.", default="");
+    p.add_option('--extension', '-e', help="The extension of the files to condense.", default="");
+    options, arguments = p.parse_args()
+    if options.origin == "" or options.output == "" or options.extension == "":
+        p.print_help()
+    else:
+        print "Input file: %(o)s*%(e)s \nOutput file: %(t)s" % {'o' : options.origin, 't' : options.output, 'e' : options.extension}
+        ff=open(os.path.join(options.output), "wt")
+        for root, dirs, files in os.walk(os.path.join(options.origin), "true", "none", "true"):
+            for infile in [f for f in files if f.endswith(options.extension)]:
+                fh=open(os.path.abspath(os.path.join(root,infile)))
+                for line in fh:
+                    ff.write(line,)
+                fh.close()
+        ff.close()
+
+if __name__ == '__main__':
+     main()

@@ -1,0 +1,25 @@
+#!/usr/bin/env python
+#Program to tally the lines in a file
+#Author: lswest
+import os
+import os
+import optparse
+
+def main():
+    usage="usage: %prog [options] args"
+    p = optparse.OptionParser()
+    p.add_option('--file', '-f', help="The path to the file to count.", default="")
+    options, arguments = p.parse_args()
+    if options.file == "":
+        p.print_help()
+    else:
+        print "Input file: %s" % options.file
+        count=0
+        ff=open(os.path.join(options.file))
+        for x in ff:
+            count+=1
+        values={'name': os.path.join(options.file), 'count' : count}
+        print "The file %(name)s contains %(count)s lines." % values
+
+if __name__ == '__main__':
+     main()
