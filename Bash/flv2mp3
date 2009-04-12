@@ -1,4 +1,6 @@
 #!/bin/bash
+#A script to automate the conversion of flv files to mp3
+#Author: lswest
 
 if [ "$1" != "" ]; then
     #convert audio

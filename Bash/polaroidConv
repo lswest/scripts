@@ -1,16 +1,15 @@
 #!/bin/bash
+#A script to automate the polaroid imagemagick stuff.
+#Author: lswest
 
-#read in arguments
-args=("$@")
-
-if [ "${args[0]}" != "" ]; then
-    convert ${args[0]} \
+if [ "$1" != "" ]; then
+    convert $1 \
           -bordercolor white  -border 6 \
           -bordercolor grey60 -border 1 \
           -background  none   -rotate 6 \
           -background  black  \( +clone -shadow 60x4+4+4 \) +swap \
           -background  none   -flatten \
-          -depth 8  -quality 100   ${args[1]}
+          -depth 8  -quality 100   $2
 else
     echo "Invalid arguments, please run this script with \"polaroidConv <input> <output>\""
 fi

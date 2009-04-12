@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 ## A script to print out my "to buy" list
+#Author: lswest
 import os
 
 home=os.path.expanduser("~")

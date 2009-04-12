@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 #A program to check if there are any updates available for Arch
+#Author: lswest
 from subprocess import Popen,PIPE
 import os
 
