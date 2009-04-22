@@ -1,15 +1,22 @@
 #!/bin/bash
-#A script to automate the conversion of flv files to mp3
-#Author: lswest
 
-if [ "$1" != "" ]; then
-    #convert audio
-    ffmpeg -i $1 "$2"
-    #move the .flv file to the Videos folder
-    mv $1 $HOME/Videos/"`echo "$2"|sed 's/mp3/flv/'`"
-    echo "FLV file was moved to the ~/Videos folder"
-    mv $2 $HOME/Music/
-    echo "Moved the mp3 to the ~/Music folder"
+if [[ "$1" != "" && "$#" == 2 ]]; then
+    #check if files exist 
+    if [ -e "$1" ]; then
+        #convert audio
+        ffmpeg -i $1 "$2"
+    else
+        echo "File "$1" doesn't exist!"
+    fi
+    #move the .flv file to the Videos folder if the files exist in the current directory
+    if [ -e "$2" ]; then
+        mv "$1" $HOME/Videos/"`echo "$2"|sed 's/mp3/flv/'`"
+        echo "FLV file was moved to the ~/Videos folder"
+        mv "$2" $HOME/Music/Hyperion/
+        echo "Moved the mp3 to the ~/Music folder"
+    else
+        echo "File "$2" doesn't exist!"
+    fi
 else
-    echo "Invalid arguments, please run this script with \"flv2mp3 <input> <output>\""
+    echo "Invalid arguments (or too few/many), please run this script with \"flv2mp3 <input> <output>\""
 fi
