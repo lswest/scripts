@@ -7,12 +7,9 @@ import os
 def main():
     usage="usage: %prog [options] args"
     p=optparse.OptionParser()
-    #add the search argument
     p.add_option("--search", "-s", help="The search term.", default="")
     options, arguments=p.parse_args()
-    #set the string variable of the search term
     search_term=options.search
-    #set up the full URL, and replace spaces with "+" symbols for the URL
     url="http://www.google.com/search?q="+search_term.replace(" ", "+")+"&ie=utf-8&oe=utf-8&aq=t&rls=org.mozilla:en-US:official&client=firefox-a"
     #Open Page
     ShowResults=webbrowser.open(url)
