@@ -1,0 +1,9 @@
+#!/bin/bash
+if [[ "$1" == "-i" ]]; then
+    notify-send "Battery Info" "`cat /proc/acpi/battery/BAT1/state`";
+else
+maxcharge=`cat /proc/acpi/battery/BAT1/info|grep "^last"|cut --delimiter=":" -f 2|sed -e 's/^[ \\t]*//'|cut --delimiter=" " -f 1`;
+curcharge=`cat /proc/acpi/battery/BAT1/state|grep "^remaining"|cut --delimiter=":" -f 2|sed -e 's/^[ \\t]*//'|cut --delimiter=" " -f 1`;
+percent=`echo "$curcharge*100/$maxcharge"|bc`;
+notify-send "Battery Percentage" "$percent % remaining";
+fi

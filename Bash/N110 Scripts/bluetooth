@@ -1,0 +1,23 @@
+#!/bin/bash
+
+if [[ "$1" != "" ]]; then
+    if [[ "$1" == "start" ]]; then
+        sudo /etc/rc.d/bluetooth start;
+        sudo hci_usb reset=1
+        sudo modprobe bluetooth;
+        sudo modprobe btusb;
+    else
+       if [[ "$1" == "stop" ]]; then
+           sudo /etc/rc.d/bluetooth stop;
+           sleep 2;
+           sudo hciconfig hci0 down
+           sudo rmmod hci_usb
+           sudo modprobe -r bluetooth;
+           sudo modprobe -r btusb;
+       else
+           echo "Incorrect argument.  Valid usage: \"bluetooth [start/stop]\"";
+       fi
+    fi
+else
+    echo "Missing argument.  Valid usage: \"bluetooth [start/stop]\"";
+fi

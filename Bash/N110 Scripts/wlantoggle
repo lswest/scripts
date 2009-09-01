@@ -1,0 +1,11 @@
+#!/bin/bash
+
+status=`ifconfig|grep "^wlan0"`;
+echo "$status"
+if [[ "$status" != "" ]]; then
+gksudo ifconfig "wlan0" "down";
+notify-send -t 80 -i "/home/lswest/.icons/Elementary_Ubuntu/scalable/status/notification-network-wireless-disconnected.svg" "Wireless off" "Wireless interface now disabled."
+else
+gksudo ifconfig "wlan0" "up";
+notify-send -t 80 -i "/home/lswest/.icons/Elementary_Ubuntu/scalable/status/notification-network-wireless-full.svg" "Wireless on" "Wireless interface now enabled."
+fi
